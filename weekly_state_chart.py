@@ -161,9 +161,9 @@ def create_weekly_state_chart():
     
     # Update layout
     fig.update_layout(
-        title='Weekly Task States with Sprint Boundaries',
-        xaxis_title='ISO Week (Start Date)',
-        yaxis_title='Number of Tasks',
+        title='Ugentlig Fremgang i forhold til Milepæle',
+        xaxis_title='Fremgang i Status fordelt pr uge',
+        yaxis_title='Antal Tasks',
         barmode='stack',
         hovermode='x unified',
         height=650,
