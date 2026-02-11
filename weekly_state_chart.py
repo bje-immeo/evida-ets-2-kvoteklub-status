@@ -126,6 +126,9 @@ def create_weekly_state_chart():
             start_pos = calculate_sprint_marker_position(iteration['start_dt'], weekly_data)
             end_pos = calculate_sprint_marker_position(iteration['end_dt'], weekly_data)
             
+            # Alternating vertical offset: every other title shifted down by 12pt
+            y_shift = 12 if idx % 2 == 1 else 0
+            
             # Add shaded region for sprint duration
             fig.add_vrect(
                 x0=start_pos,
@@ -135,7 +138,8 @@ def create_weekly_state_chart():
                 line_width=0,
                 annotation_text=iteration['name'],
                 annotation_position="top outside",
-                annotation_font_size=10
+                annotation_font_size=10,
+                annotation_yshift=y_shift
             )
             
             # Add dashed line at sprint start
