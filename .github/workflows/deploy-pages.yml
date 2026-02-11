@@ -45,7 +45,7 @@ jobs:
       - name: Generate chart
         env:
           AZURE_DEVOPS_PAT: ${{ secrets.AZURE_DEVOPS_PAT }}
-        run: python feature_status_chart.py
+        run: python weekly_state_chart.py
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
