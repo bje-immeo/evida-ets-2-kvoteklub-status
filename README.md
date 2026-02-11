@@ -62,23 +62,6 @@ This will:
 - Display sprint start/end markers
 - Open the chart in your default browser
 
-### Generate Feature Status Chart
-
-```bash
-python feature_status_chart.py
-```
-
-This will:
-- Query all features and their associated tasks
-- Create horizontal stacked bars showing task status distribution per feature
-- Open the chart in your default browser
-
-### Redirect Output to File
-
-```bash
-python weekly_state_chart.py > output.txt
-```
-
 ## Known Behavior / Important Notes
 
 ### Baseline Calculation Behavior
