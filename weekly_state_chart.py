@@ -38,6 +38,20 @@ def calculate_sprint_marker_position(sprint_date, weekly_data):
 
 def create_weekly_state_chart():
     """Create a stacked bar chart showing task states over time"""
+    
+    # Define custom colors for different states
+    state_colors = {
+        'New': "#6B6BFF",           # Red
+        'Active': '#4ECDC4',        # Teal
+        'Resolved': "#4CD145",      # Blue
+        'Completed': '#4CD145',     # Green
+        'Removed': '#FFEAA7',       # Yellow
+        'Closed': '#4CD145'         # Plum
+    }
+    
+    # Fallback colors for any states not explicitly defined
+    fallback_colors = ['#FF9F43', '#6C5CE7', '#A29BFE', '#FD79A8', '#00B894', '#E17055']
+    
     # Get the data
     tracker = WeeklyTaskStateTracker()
     weekly_data = tracker.get_weekly_task_states()
@@ -97,6 +111,7 @@ def create_weekly_state_chart():
     
     # Add "New" as a separate bar (not stacked)
     if new_state in state_counts:
+        new_color = state_colors.get(new_state, fallback_colors[0])
         fig.add_trace(go.Bar(
             name=new_state,
             x=weeks,
@@ -104,11 +119,15 @@ def create_weekly_state_chart():
             text=state_counts[new_state],
             textposition='inside',
             legendgroup='new',
-            offsetgroup='new'
+            offsetgroup='new',
+            marker_color=new_color
         ))
     
     # Add stacked bars for all other states
-    for state in other_states:
+    for i, state in enumerate(other_states):
+        # Get color for this state, or use fallback color
+        color = state_colors.get(state, fallback_colors[i % len(fallback_colors)])
+        
         fig.add_trace(go.Bar(
             name=state,
             x=weeks,
@@ -116,7 +135,8 @@ def create_weekly_state_chart():
             text=state_counts[state],
             textposition='inside',
             legendgroup='other',
-            offsetgroup='other'
+            offsetgroup='other',
+            marker_color=color
         ))
     
     # Add sprint markers as shaded regions with dashed lines
